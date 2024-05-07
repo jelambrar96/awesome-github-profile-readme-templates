@@ -1,0 +1,19 @@
+name: full_readme
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths: 'templates/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create folder
+        run: |
+          mkdir -p templates_joined && cat templates/*md > templates_joined/README.md
+      - name: push
+        run: |
+          git add templates_joined/* && git commit -m "create joined file" && git push origin master
