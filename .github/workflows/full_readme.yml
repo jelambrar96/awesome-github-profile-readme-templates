@@ -15,7 +15,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Create folder
         run: |
-          mkdir -p templates_joined && cat templates/*md > templates_joined/README.md
+          mkdir -p templates_joined
+          cat templates/*md > templates_joined/README.md
       - name: push
         run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
           git add templates_joined/* && git commit -m "create joined file" && git push origin master
+
